@@ -1,0 +1,63 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "monolith",
+    "authenticationType": "oauth2",
+    "baseName": "jhipster",
+    "blueprints": [
+      {
+        "name": "generator-jhipster-ionic",
+        "version": "7.1.0"
+      }
+    ],
+    "buildTool": "maven",
+    "cacheProvider": "ehcache",
+    "clientFramework": "angularX",
+    "clientPackageManager": "npm",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1650904352628,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "devServerPort": 4200,
+    "dtoSuffix": "DTO",
+    "enableGradleEnterprise": false,
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": true,
+    "entities": ["Project", "Label", "Ticket", "Attachment", "Comment"],
+    "entitySuffix": "",
+    "gradleEnterpriseHost": "",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "7.8.1",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1650904652000,
+    "messageBroker": false,
+    "nativeLanguage": "en",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-ionic",
+        "version": "7.1.0"
+      }
+    ],
+    "packageFolder": "com/mycompany/myapp",
+    "packageName": "com.mycompany.myapp",
+    "pages": [],
+    "prodDatabaseType": "postgresql",
+    "reactive": false,
+    "searchEngine": false,
+    "serverPort": "8080",
+    "serviceDiscoveryType": false,
+    "skipCheckLengthOfIdentifier": false,
+    "skipFakeData": false,
+    "skipJhipsterDependencies": true,
+    "skipUserManagement": true,
+    "testFrameworks": ["cypress"],
+    "websocket": false,
+    "withAdminUi": true
+  },
+  "generator-jhipster-ionic": {
+    "appDir": null,
+    "ionicDir": "../ionic4j"
+  }
+}

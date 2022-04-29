@@ -1,0 +1,163 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-ticket-heading" data-cy="TicketCreateUpdateHeading" jhiTranslate="jhipsterApp.ticket.home.createOrEditLabel">
+        Create or edit a Ticket
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.dueDate" for="field_dueDate">Due Date</label>
+          <div class="input-group">
+            <input
+              id="field_dueDate"
+              data-cy="dueDate"
+              type="text"
+              class="form-control"
+              name="dueDate"
+              ngbDatepicker
+              #dueDateDp="ngbDatepicker"
+              formControlName="dueDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'jhipsterApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ 'jhipsterApp.Status.' + status | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'jhipsterApp.Type.null' | translate }}</option>
+            <option *ngFor="let type of typeValues" [value]="type">{{ 'jhipsterApp.Type.' + type | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.priority" for="field_priority">Priority</label>
+          <select class="form-control" name="priority" formControlName="priority" id="field_priority" data-cy="priority">
+            <option [ngValue]="null">{{ 'jhipsterApp.Priority.null' | translate }}</option>
+            <option *ngFor="let priority of priorityValues" [value]="priority">{{ 'jhipsterApp.Priority.' + priority | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.project" for="field_project">Project</label>
+          <select class="form-control" id="field_project" data-cy="project" name="project" formControlName="project">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="projectOption.id === editForm.get('project')!.value?.id ? editForm.get('project')!.value : projectOption"
+              *ngFor="let projectOption of projectsSharedCollection; trackBy: trackProjectById"
+            >
+              {{ projectOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.assignedTo" for="field_assignedTo">Assigned To</label>
+          <select class="form-control" id="field_assignedTo" data-cy="assignedTo" name="assignedTo" formControlName="assignedTo">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('assignedTo')!.value?.id ? editForm.get('assignedTo')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.ticket.reportedBy" for="field_reportedBy">Reported By</label>
+          <select class="form-control" id="field_reportedBy" data-cy="reportedBy" name="reportedBy" formControlName="reportedBy">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('reportedBy')!.value?.id ? editForm.get('reportedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="jhipsterApp.ticket.label" for="field_labels">Label</label>
+          <select class="form-control" id="field_labels" data-cy="label" multiple name="labels" formControlName="labels">
+            <option
+              [ngValue]="getSelectedLabel(labelOption, editForm.get('labels')!.value)"
+              *ngFor="let labelOption of labelsSharedCollection; trackBy: trackLabelById"
+            >
+              {{ labelOption.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

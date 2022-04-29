@@ -1,0 +1,9 @@
+{
+  "jhipsterApp": {
+    "Type": {
+      "null": "",
+      "BUG": "Bug",
+      "FEATURE": "Feature"
+    }
+  }
+}

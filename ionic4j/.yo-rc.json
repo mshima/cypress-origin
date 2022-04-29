@@ -1,0 +1,27 @@
+{
+  "generator-jhipster": {
+    "authenticationType": "oauth2",
+    "baseName": "jhipster",
+    "blueprints": [
+      {
+        "name": "generator-jhipster-ionic",
+        "version": "7.1.0"
+      }
+    ],
+    "enableTranslation": true,
+    "jhipsterVersion": "0.0.0",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-ionic",
+        "version": "7.1.0"
+      }
+    ],
+    "prettierDefaultIndent": 2,
+    "projectName": "JHipster project",
+    "testFrameworks": ["cypress"]
+  },
+  "generator-jhipster-ionic": {
+    "appDir": "../bug-tracker-oauth",
+    "ionicDir": null
+  }
+}

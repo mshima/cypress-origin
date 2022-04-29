@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-comment-heading" data-cy="CommentCreateUpdateHeading" jhiTranslate="jhipsterApp.comment.home.createOrEditLabel">
+        Create or edit a Comment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.comment.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.comment.text" for="field_text">Text</label>
+          <input type="text" class="form-control" name="text" id="field_text" data-cy="text" formControlName="text" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.comment.login" for="field_login">Login</label>
+          <select class="form-control" id="field_login" data-cy="login" name="login" formControlName="login">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('login')!.value?.id ? editForm.get('login')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.comment.child" for="field_child">Child</label>
+          <select class="form-control" id="field_child" data-cy="child" name="child" formControlName="child">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="commentOption.id === editForm.get('child')!.value?.id ? editForm.get('child')!.value : commentOption"
+              *ngFor="let commentOption of commentsSharedCollection; trackBy: trackCommentById"
+            >
+              {{ commentOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
