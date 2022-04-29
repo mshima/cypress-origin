@@ -4,6 +4,9 @@ Reproduction for https://github.com/cypress-io/cypress/issues/21201#issuecomment
 
 Requirements: java >=11, node/npm
 
+Add keycloak to hosts
+`echo '127.0.0.1  keycloak' >> /etc/hosts`
+
 Clone and start the application and the ionic application.
 Starts (postgres, keycloak and the application at docker) and an ionic application
 ```
